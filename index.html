@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>বাংলাদেশ রেডিও · Bangladesh Radio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{--bg:#eef4f0;--bg2:#dfece5;--ink:#0f2b25;--mute:#5a736b;--card:#fff;--line:#cfe0d8;--red:#e0412f;--gold:#f2b134;--green:#0f6b55;--glass:rgba(255,255,255,.86);--shadow:0 10px 30px -14px rgba(15,60,48,.35)}
+[data-theme=dark]{--bg:#09191a;--bg2:#0f2a25;--ink:#e9f5f0;--mute:#90b2a8;--card:#12302a;--line:#244a40;--green:#3cc9a3;--glass:rgba(12,34,29,.88);--shadow:0 10px 30px -14px #000}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Hind Siliguri",system-ui,sans-serif;color:var(--ink);background:var(--bg);padding-bottom:130px;transition:background .3s,color .3s}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 500px at 85% -10%,color-mix(in srgb,var(--red) 22%,transparent),transparent 70%),radial-gradient(700px 500px at -10% 30%,color-mix(in srgb,var(--green) 18%,transparent),transparent 70%)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-family:"Bricolage Grotesque","Hind Siliguri",sans-serif;font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:10px}
+.dot{width:22px;height:22px;border-radius:50%;background:var(--red)}
+.ctrl{display:flex;gap:8px}
+.pill{border:1.5px solid var(--line);background:var(--card);border-radius:999px;height:40px;min-width:40px;padding:0 14px;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;transition:transform .15s,border-color .15s}
+.pill:hover{border-color:var(--green)}.pill:active{transform:scale(.95)}
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:center;padding:20px 0 34px}
+h1{font-family:"Bricolage Grotesque","Hind Siliguri",sans-serif;font-weight:800;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1.02;margin:0 0 14px;letter-spacing:-.02em}
+.sub{font-size:1.15rem;color:var(--mute);max-width:30ch;margin:0 0 22px}
+.go{background:var(--red);color:#fff;border:0;border-radius:999px;padding:13px 24px;font-weight:700;font-size:1rem;box-shadow:0 10px 24px -10px var(--red)}
+.go:active{transform:scale(.97)}
+.sunbox{position:relative;aspect-ratio:1;max-width:320px;width:100%;margin:auto;display:grid;place-items:center}
+.sun{width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff7a5f,var(--red) 60%,#a82414);box-shadow:0 20px 60px -10px color-mix(in srgb,var(--red) 60%,transparent);display:grid;place-items:center;z-index:2}
+.ring{position:absolute;inset:19%;border-radius:50%;border:2px solid var(--red);opacity:0}
+.playing .ring{animation:ping 2.4s ease-out infinite}.playing .ring:nth-child(2){animation-delay:.8s}.playing .ring:nth-child(3){animation-delay:1.6s}
+@keyframes ping{0%{transform:scale(1);opacity:.55}100%{transform:scale(2.1);opacity:0}}
+.eq{display:flex;gap:5px;align-items:flex-end;height:44px}
+.eq i{width:7px;height:10px;border-radius:4px;background:#fff;opacity:.9}
+.playing .eq i{animation:bar 1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.45s}.eq i:nth-child(5){animation-delay:.6s}
+@keyframes bar{0%,100%{height:10px}50%{height:44px}}
+.find{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);padding:12px 0;border-bottom:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.search{flex:1;min-width:230px;position:relative}
+.search input{width:100%;height:46px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:0 16px 0 44px}
+.search svg{position:absolute;left:14px;top:13px;width:20px;height:20px;stroke:var(--mute)}
+.seg{display:flex;background:var(--bg2);border-radius:14px;padding:4px}
+.seg button{border:0;background:transparent;border-radius:10px;height:38px;padding:0 14px;font-weight:600;color:var(--mute)}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none}
+.chip{flex:none;border:1.5px solid var(--line);background:transparent;border-radius:999px;padding:5px 14px;color:var(--mute);font-weight:500}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff}
+#count{color:var(--mute);margin:18px 0 12px}
+ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+li{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:12px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+li:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+li.bad{opacity:.5}
+li.on{border-color:var(--red);box-shadow:0 0 0 3px color-mix(in srgb,var(--red) 18%,transparent)}
+.av{flex:none;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:1.3rem;font-family:"Bricolage Grotesque","Hind Siliguri",sans-serif}
+.info{flex:1;min-width:0}
+.name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{font-size:.85rem;color:var(--mute);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fav{flex:none;width:38px;height:38px;border-radius:50%;border:0;background:none;color:var(--mute)}
+.fav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2}
+.fav.is{color:var(--gold)}.fav.is svg{fill:var(--gold)}
+.sk{height:78px;border-radius:18px;background:linear-gradient(90deg,var(--bg2),var(--card),var(--bg2));background-size:200% 100%;animation:sh 1.3s infinite;border:0}
+@keyframes sh{to{background-position:-200% 0}}
+.msg{text-align:center;color:var(--mute);padding:50px 10px}
+footer{color:var(--mute);font-size:.85rem;text-align:center;padding:36px 0 10px}
+#bar{position:fixed;left:12px;right:12px;bottom:12px;z-index:30;max-width:1016px;margin:0 auto;background:var(--glass);backdrop-filter:blur(16px);border:1.5px solid var(--line);border-radius:22px;padding:10px 14px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow)}
+#bar .av{width:48px;height:48px;border-radius:14px}
+.now{flex:1;min-width:0}
+#np{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#st{font-size:.85rem;color:var(--mute)}
+.btns{display:flex;align-items:center;gap:6px}
+.ib{width:40px;height:40px;border-radius:50%;border:0;background:transparent;display:grid;place-items:center}
+.ib:hover{background:var(--bg2)}.ib svg{width:22px;height:22px;fill:currentColor}
+.big{width:52px;height:52px;background:var(--red);color:#fff}.big:hover{background:var(--red);filter:brightness(1.1)}
+.vol{display:flex;align-items:center;gap:6px}.vol input{width:90px;accent-color:var(--red)}
+#sleepNum{display:none}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.sunbox{max-width:220px;order:-1}.vol{display:none}.sub{max-width:none}
+body{padding-bottom:170px}
+#bar{display:grid;grid-template-columns:48px minmax(0,1fr) auto;grid-template-areas:"av now sleep" "btns btns btns";gap:8px 12px;padding:12px 14px}
+#barAv{grid-area:av}.now{grid-area:now}#sleepBtn{grid-area:sleep;padding:0 10px;gap:4px}
+.btns{grid-area:btns;justify-content:center;gap:18px}
+#sleepTxt{display:none}#sleepNum{display:inline;font-size:.85rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="brand"><span class="dot"></span><span data-i="brand"></span></div>
+    <div class="ctrl">
+      <button class="pill" id="lang" aria-label="Language">EN</button>
+      <button class="pill" id="theme" aria-label="Theme"></button>
+    </div>
+  </div>
+  <section class="hero" id="hero">
+    <div>
+      <h1 data-i="title"></h1>
+      <p class="sub" data-i="sub"></p>
+      <button class="go" id="surprise" data-i="surprise"></button>
+    </div>
+    <div class="sunbox"><span class="ring"></span><span class="ring"></span><span class="ring"></span>
+      <div class="sun"><div class="eq"><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
+  </section>
+</div>
+<div class="find"><div class="wrap">
+  <div class="row">
+    <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" data-ph="ph"></label>
+    <div class="seg" role="group">
+      <button id="vAll" aria-pressed="true" data-i="all"></button>
+      <button id="vFav" aria-pressed="false" data-i="favs"></button>
+      <button id="vRec" aria-pressed="false" data-i="recent"></button>
+    </div>
+  </div>
+  <div class="chips" id="chips"></div>
+</div></div>
+<main class="wrap">
+  <div id="count"></div>
+  <ul id="list"></ul>
+  <div class="msg" id="empty" hidden></div>
+  <footer data-i="foot"></footer>
+</main>
+<div id="bar">
+  <div class="av" id="barAv" style="background:var(--green)">♪</div>
+  <div class="now"><div id="np"></div><div id="st"></div></div>
+  <div class="vol"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 4V6L7 10H3z"/></svg><input id="vol" type="range" min="0" max="1" step=".05" aria-label="Volume"></div>
+  <button class="pill" id="sleepBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span id="sleepTxt"></span><span id="sleepNum"></span></button>
+  <div class="btns">
+    <button class="ib" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 18V6z"/></svg></button>
+    <button class="ib big" id="main" aria-label="Play"><svg id="mainIc" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+    <button class="ib" id="next" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg></button>
+  </div>
+</div>
+<audio id="a" preload="none"></audio>
+<script>
+var T={en:{brand:"Bangladesh Radio",title:"Bangladesh on the air.",sub:"Every Bangladeshi radio station, free to listen. No sign-up.",surprise:"Surprise me",ph:"Search stations, e.g. Foorti, news, Dhaka",all:"All",favs:"Favourites",recent:"Recent",n:"{n} stations",noFav:"No favourites yet. Tap the star on a station to save it.",noRec:"Nothing played yet.",noRes:"No stations found. Try another word.",fail:"Couldn't load the station list. Check your internet and refresh.",idle:"Pick a station to start",conn:"Connecting…",live:"Live now",buf:"Buffering…",err:"This stream isn't working. Trying the next one…",err2:"This stream isn't working. Try another station.",foot:"Station list from the open Radio Browser directory. Some streams may be offline at times.",sleep:"Sleep",off:"Off",min:"m",noneSel:"No station selected",mixed:"This stream is http-only, so browsers block it on https sites.",open:"Open it directly"},
+bn:{brand:"বাংলাদেশ রেডিও",title:"বাংলাদেশ এখন অন এয়ার।",sub:"বাংলাদেশের সব রেডিও স্টেশন শুনুন, একদম ফ্রি। কোনো সাইন-আপ লাগবে না।",surprise:"যেকোনো একটা চালান",ph:"স্টেশন খুঁজুন, যেমন ফুর্তি, খবর, ঢাকা",all:"সব",favs:"প্রিয়",recent:"সাম্প্রতিক",n:"{n}টি স্টেশন",noFav:"এখনো কোনো প্রিয় নেই। স্টেশনের তারা চাপুন।",noRec:"এখনো কিছু চালানো হয়নি।",noRes:"কোনো স্টেশন পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজুন।",fail:"স্টেশন তালিকা লোড হয়নি। ইন্টারনেট দেখে পেজ রিফ্রেশ করুন।",idle:"শুরু করতে একটি স্টেশন বেছে নিন",conn:"সংযুক্ত হচ্ছে…",live:"এখন লাইভ",buf:"বাফার হচ্ছে…",err:"এই স্ট্রিম চলছে না। পরেরটা চেষ্টা করছি…",err2:"এই স্ট্রিম চলছে না। অন্য স্টেশন চেষ্টা করুন।",foot:"স্টেশন তালিকা ওপেন Radio Browser ডিরেক্টরি থেকে। কিছু স্ট্রিম মাঝে মাঝে বন্ধ থাকতে পারে।",sleep:"ঘুম টাইমার",off:"বন্ধ",min:" মিনিট",noneSel:"কোনো স্টেশন বাছা হয়নি",mixed:"এই স্ট্রিম শুধু http, তাই https সাইটে ব্রাউজার এটা আটকে দেয়।",open:"সরাসরি খুলুন"}};
+var SV=["https://de1.api.radio-browser.info","https://nl1.api.radio-browser.info","https://at1.api.radio-browser.info"];
+var PATH="/json/stations/bycountrycodeexact/BD?hidebroken=true&order=clickcount&reverse=true&limit=500";
+function ls(k,d){try{var v=localStorage.getItem("bdr-"+k);return v===null?d:JSON.parse(v)}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem("bdr-"+k,JSON.stringify(v))}catch(e){}}
+var $=function(i){return document.getElementById(i)};
+var lang=ls("lang","bn"),theme=ls("theme",matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"),
+favs=ls("favs",[]),recent=ls("recent",[]),view="all",tag="",stations=[],rows=[],cur=null,errN=0,sleepMin=0,sleepT=null,loaded=false;
+var a=$("a");a.volume=ls("vol",1);$("vol").value=a.volume;
+function t(k){return T[lang][k]}
+function num(n){return lang==="bn"?String(n).replace(/\d/g,function(d){return"০১২৩৪৫৬৭৮৯"[d]}):n}
+function applyStatic(){
+  document.documentElement.lang=lang;document.documentElement.dataset.theme=theme;
+  document.querySelectorAll("[data-i]").forEach(function(e){e.textContent=t(e.dataset.i)});
+  document.querySelectorAll("[data-ph]").forEach(function(e){e.placeholder=t(e.dataset.ph)});
+  $("lang").textContent=lang==="bn"?"EN":"বাং";
+  $("theme").innerHTML=theme==="dark"?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 15.3A8 8 0 0 1 8.7 4 8 8 0 1 0 20 15.3z"/></svg>';
+  $("sleepTxt").textContent=t("sleep")+": "+(sleepMin?num(sleepMin)+t("min"):t("off"));
+  $("sleepNum").textContent=sleepMin?num(sleepMin):"";$("sleepBtn").title=$("sleepTxt").textContent;
+  if(!cur){$("np").textContent=t("noneSel");$("st").textContent=t("idle")}
+  else if(a.paused&&!a.error)$("st").textContent="";
+}
+function hue(s){var h=0;for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))%360;return h}
+function avatar(el,name){var h=hue(name),w=name.trim().split(/\s+/),ini=Array.from(w[0])[0]+(w[1]?Array.from(w[1])[0]:"");
+  el.style.background="linear-gradient(135deg,hsl("+h+" 65% 46%),hsl("+((h+45)%360)+" 70% 34%))";el.textContent=ini.toUpperCase()}
+function skel(){$("list").innerHTML="";for(var i=0;i<9;i++){var l=document.createElement("li");l.className="sk";l.style.cursor="default";$("list").appendChild(l)}}
+async function load(){
+  skel();
+  for(var i=0;i<SV.length;i++){
+    try{var r=await fetch(SV[i]+PATH);if(!r.ok)continue;var d=await r.json(),seen={};
+      stations=d.filter(function(s){var n=(s.name||"").trim().toLowerCase();if(!n||!s.url_resolved||seen[n])return false;seen[n]=1;return true});
+      loaded=true;buildChips();render();restore();return}catch(e){}
+  }
+  $("list").innerHTML="";$("empty").hidden=false;$("empty").textContent=t("fail");
+}
+function buildChips(){
+  var c={};stations.forEach(function(s){(s.tags||"").split(",").forEach(function(x){x=x.trim().toLowerCase();if(x&&x.length<18)c[x]=(c[x]||0)+1})});
+  var top=Object.keys(c).filter(function(k){return c[k]>=3}).sort(function(a,b){return c[b]-c[a]}).slice(0,10);
+  var h="";top.forEach(function(k){h+='<button class="chip" aria-pressed="false" data-t="'+k.replace(/"/g,"")+'">'+k.charAt(0).toUpperCase()+k.slice(1)+"</button>"});
+  $("chips").innerHTML=h;$("chips").hidden=!top.length;
+  $("chips").onclick=function(e){var b=e.target.closest(".chip");if(!b)return;tag=tag===b.dataset.t?"":b.dataset.t;
+    document.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x.dataset.t===tag)});render()};
+}
+function render(){
+  if(!loaded)return;
+  var q=$("q").value.trim().toLowerCase();
+  var pool=view==="fav"?stations.filter(function(s){return favs.indexOf(s.stationuuid)>=0}):
+    view==="rec"?recent.map(function(id){return stations.filter(function(s){return s.stationuuid===id})[0]}).filter(Boolean):stations;
+  rows=pool.filter(function(s){var hay=(s.name+" "+(s.tags||"")+" "+(s.state||"")).toLowerCase();
+    return(!q||hay.indexOf(q)>=0)&&(!tag||(s.tags||"").toLowerCase().indexOf(tag)>=0)});
+  var ul=$("list");ul.innerHTML="";
+  rows.forEach(function(s){
+    var li=document.createElement("li");if(cur&&cur.stationuuid===s.stationuuid)li.className="on";
+    var meta=[s.state,(s.tags||"").split(",").slice(0,2).join(", "),s.bitrate?num(s.bitrate)+" kbps":""].filter(Boolean).join(" • ")||"Bangladesh";
+    li.innerHTML='<div class="av"></div><div class="info"><div class="name"></div><div class="meta"></div></div><button class="fav" aria-label="Favourite"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></button>';
+    if(SEC&&s.bad)li.classList.add("bad");
+    avatar(li.querySelector(".av"),s.name);li.querySelector(".name").textContent=s.name.trim();li.querySelector(".meta").textContent=meta;
+    var fb=li.querySelector(".fav");if(favs.indexOf(s.stationuuid)>=0)fb.classList.add("is");
+    fb.onclick=function(e){e.stopPropagation();var i=favs.indexOf(s.stationuuid);if(i>=0)favs.splice(i,1);else favs.push(s.stationuuid);sv("favs",favs);render()};
+    li.onclick=function(){play(s)};ul.appendChild(li)});
+  $("count").textContent=t("n").replace("{n}",num(rows.length));
+  var em=$("empty");em.hidden=!!rows.length;
+  if(!rows.length)em.textContent=view==="fav"&&!q&&!tag?t("noFav"):view==="rec"&&!q&&!tag?t("noRec"):t("noRes");
+}
+var SEC=location.protocol==="https:";
+function srcFor(s){var u=s.url_resolved;return SEC&&u.indexOf("http:")===0?u.replace("http:","https:"):u}
+function showMixed(){var st=$("st");st.textContent=t("mixed")+" ";var l=document.createElement("a");l.href=cur.url_resolved;l.target="_blank";l.rel="noopener noreferrer";l.textContent=t("open");l.style.color="var(--red)";l.style.fontWeight="600";st.appendChild(l)}
+function play(s,keepErr){
+  if(!keepErr)errN=0;
+  if(cur&&cur.stationuuid===s.stationuuid&&!a.error){toggle();return}
+  cur=s;a.src=srcFor(s);$("np").textContent=s.name.trim();$("st").textContent=t("conn");avatar($("barAv"),s.name);
+  a.play().catch(function(){});
+  recent=[s.stationuuid].concat(recent.filter(function(x){return x!==s.stationuuid})).slice(0,12);sv("recent",recent);sv("last",s.stationuuid);
+  try{if("mediaSession"in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:s.name.trim(),artist:t("brand")})}catch(e){}
+  render();
+}
+function toggle(){if(!cur){if(rows.length)play(rows[0]);return}a.paused?a.play().catch(function(){}):a.pause()}
+function step(d){if(!rows.length)return;var i=-1;rows.forEach(function(s,k){if(cur&&s.stationuuid===cur.stationuuid)i=k});
+  var n=rows.length,k=0,nx;
+  do{i=(i+d+n)%n;nx=rows[i];k++}while(SEC&&nx.bad&&k<n);
+  play(nx,d===1&&errN>0)}
+function restore(){var id=ls("last",null);if(!id)return;var s=stations.filter(function(x){return x.stationuuid===id})[0];
+  if(s){cur=s;$("np").textContent=s.name.trim();avatar($("barAv"),s.name);$("st").textContent="";a.src=srcFor(s);render()}}
+function setIcon(p){$("mainIc").innerHTML=p?'<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';document.body.classList.toggle("playing",p)}
+a.onplaying=function(){errN=0;$("st").textContent=t("live");setIcon(true)};
+a.onpause=function(){setIcon(false)};
+a.onwaiting=function(){$("st").textContent=t("buf")};
+a.onerror=function(){setIcon(false);
+  if(SEC&&cur&&cur.url_resolved.indexOf("http:")===0){cur.bad=true;showMixed();render();return}
+  if(errN<3){errN++;$("st").textContent=t("err");setTimeout(function(){if(a.error)step(1)},1800)}else $("st").textContent=t("err2")};
+$("main").onclick=toggle;$("prev").onclick=function(){step(-1)};$("next").onclick=function(){step(1)};
+$("surprise").onclick=function(){var p=rows.length?rows:stations;if(p.length)play(p[Math.floor(Math.random()*p.length)])};
+$("vol").oninput=function(e){a.volume=e.target.value;sv("vol",+e.target.value)};
+$("q").oninput=render;
+$("lang").onclick=function(){lang=lang==="bn"?"en":"bn";sv("lang",lang);applyStatic();render()};
+$("theme").onclick=function(){theme=theme==="dark"?"light":"dark";sv("theme",theme);applyStatic()};
+function setView(v){view=v;[["vAll","all"],["vFav","fav"],["vRec","rec"]].forEach(function(p){$(p[0]).setAttribute("aria-pressed",p[1]===v)});render()}
+$("vAll").onclick=function(){setView("all")};$("vFav").onclick=function(){setView("fav")};$("vRec").onclick=function(){setView("rec")};
+$("sleepBtn").onclick=function(){var o=[0,15,30,60];sleepMin=o[(o.indexOf(sleepMin)+1)%o.length];clearTimeout(sleepT);
+  if(sleepMin)sleepT=setTimeout(function(){a.pause();sleepMin=0;applyStatic()},sleepMin*60000);applyStatic()};
+document.addEventListener("keydown",function(e){if(/INPUT|TEXTAREA/.test(document.activeElement.tagName))return;
+  if(e.code==="Space"){e.preventDefault();toggle()}else if(e.key==="ArrowRight")step(1);else if(e.key==="ArrowLeft")step(-1)});
+try{if("mediaSession"in navigator){var m=navigator.mediaSession;m.setActionHandler("play",toggle);m.setActionHandler("pause",toggle);m.setActionHandler("previoustrack",function(){step(-1)});m.setActionHandler("nexttrack",function(){step(1)})}}catch(e){}
+applyStatic();load();
+</script>
+</body>
+</html>
